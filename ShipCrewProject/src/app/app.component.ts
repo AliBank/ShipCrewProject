@@ -15,6 +15,7 @@ export class AppComponent implements OnInit{
   title = 'ShipCrewProject';
 
   crewList: Crew[] = [];
+  displayedColumns: string[] = ['id', 'name', 'lastName', 'role', 'dailyRate', 'actions'];
 
   constructor(private crewService: CrewService) {}
 
