@@ -1,17 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { MatTableModule } from '@angular/material/table';
+import { CrewService } from './services/crew.service';
+import { Crew } from './models/crew.model';
+import { Certificate } from './models/certificate.model';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'ShipCrewProject';
-  sayac : number = 5;
 
-  name : string = "Ali";
+  crewList: Crew[] = [];
+
+  constructor(private crewService: CrewService) {}
+
+  ngOnInit(): void {
+    this.crewService.getCrewList().subscribe((crewList: Crew[]) => {
+      this.crewList = crewList;
+    });
+  }
 
 }
