@@ -15,14 +15,25 @@ import { MatCardModule } from '@angular/material/card'; // Import MatCardModule 
 })
 export class AppComponent implements OnInit{
   title = 'ShipCrewProject';
-  crewList: Crew[] = []; 
-  displayedColumns: string[] = ['id', 'name', 'lastName', 'role', 'dailyRate', 'actions'];
+
+  displayedColumns: string[] = [
+    'id',
+    'firstName',
+    'lastName',
+    'nationality',
+    'title',
+    'daysOnBoard',
+    'dailyRate',
+    'currency',
+    'totalIncome'
+  ];
+  dataSource = new MatTableDataSource<Crew>();
 
   constructor(private crewService: CrewService) {}
 
   ngOnInit(): void {
-    this.crewService.getCrewList().subscribe((crew: Crew[]) => {
-      this.crewList = crew;
+    this.crewService.getCrewList().subscribe((crewList: Crew[]) => {
+      this.dataSource.data = crewList;
     });
   }
 }
