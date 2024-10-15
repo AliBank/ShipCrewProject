@@ -17,6 +17,7 @@ export class AppComponent implements OnInit{
   title = 'ShipCrewProject';
 
   displayedColumns: string[] = [
+    'actions',
     'id',
     'firstName',
     'lastName',
