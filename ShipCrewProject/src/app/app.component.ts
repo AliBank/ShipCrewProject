@@ -32,6 +32,18 @@ export class AppComponent implements OnInit{
   constructor(private crewService: CrewService) {}
 
   ngOnInit(): void {
+    this.getCrewList();
+  }
+
+  deleteCrewMember(id: number): void {
+    this.crewService.deleteCrew(id).subscribe(success => {
+      if (success) {
+        this.getCrewList();
+      }
+    });
+  }
+
+  getCrewList() {
     this.crewService.getCrewList().subscribe((crewList: Crew[]) => {
       this.dataSource.data = crewList;
     });

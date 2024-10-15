@@ -96,7 +96,8 @@ export class CrewService {
   }
 
   // Delete a crew member by ID.
-  deleteCrew(id: number): void {
+  deleteCrew(id: number): Observable<boolean> {
     this.crewList = this.crewList.filter(crew => crew.id !== id);
+    return of(true);
   }
 }

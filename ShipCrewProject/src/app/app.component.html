@@ -2,6 +2,12 @@
 
 <!-- app.component.html -->
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let crew">
+          <button mat-button color="warn" (click)="deleteCrewMember(crew.id)">Delete</button>
+        </td>
+      </ng-container>
     <!-- ID Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
