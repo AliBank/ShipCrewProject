@@ -7,6 +7,8 @@ import { Certificate } from '../models/certificate.model';
 import { MatListModule } from '@angular/material/list'; // Import MatListModule here
 import { MatButtonModule } from '@angular/material/button'; // Import MatButtonModule if you're using mat-button
 import { MatCardModule } from '@angular/material/card'; // Import MatCardModule if using mat-card
+import { Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'crew-detail-page',
@@ -30,7 +32,9 @@ export class CrewDetailPageComponent implements OnInit{
   ];
   dataSource = new MatTableDataSource<Crew>();
 
-  constructor(private crewService: CrewService) {}
+  constructor(private crewService: CrewService , 
+    public dialogRef: MatDialogRef<CrewDetailPageComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   ngOnInit(): void {
     this.getCrewList();

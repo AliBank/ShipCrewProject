@@ -80,6 +80,16 @@ export class CrewService {
     return of(this.crewList);
   }
 
+  // Method to get a crew member by their ID
+  getCrewById(id: number): Observable<Crew> {
+    const crew = this.crewList.find(crew => crew.id === id);
+    if (crew) {
+      return of(crew);
+    } else {
+      throw new Error(`Crew with ID ${id} not found`);
+    }
+  }
+
   // Add a new crew member.
   addCrew(newCrew: Crew): void {
     newCrew.calculateTotalIncome();
