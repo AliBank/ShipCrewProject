@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { MatListModule } from '@angular/material/list'; // Import MatListModule here
 import { MatButtonModule } from '@angular/material/button'; // Import MatButtonModule if you're using mat-button
 import { MatCardModule } from '@angular/material/card'; // Import MatCardModule if using mat-card
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { CrewService } from './services/crew.service';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, FormsModule, MatTableModule, BrowserAnimationsModule,MatListModule,MatButtonModule,MatCardModule],
+  imports: [BrowserModule, FormsModule, MatTableModule, BrowserAnimationsModule,MatListModule,MatButtonModule,MatCardModule,MatInputModule,MatFormFieldModule],
   providers: [CrewService],
   bootstrap: [AppComponent]
 })

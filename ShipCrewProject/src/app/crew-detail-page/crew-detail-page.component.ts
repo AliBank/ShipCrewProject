@@ -17,10 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './crew-detail-page.component.scss'
 })
 export class CrewDetailPageComponent implements OnInit {
-  title = 'ShipCrewProject';
   rCrew: any;
-
-  dataSource = new MatTableDataSource<Crew>();
 
   constructor(private crewService: CrewService,
     private snackBar: MatSnackBar,
