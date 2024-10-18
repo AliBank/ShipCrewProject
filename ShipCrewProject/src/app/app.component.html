@@ -2,12 +2,20 @@
 
 <!-- app.component.html -->
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
     <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td mat-cell *matCellDef="let crew">
-          <button mat-button color="warn" (click)="deleteCrewMember(crew.id)">Delete</button>
-        </td>
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let crew">
+        <!-- Delete Button -->
+        <button mat-button color="warn" (click)="deleteCrewMember(crew.id)">Delete</button>
+        
+        <!-- Open Crew Detail Button -->
+        <button mat-button (click)="openCrewDetail(crew.id)" matTooltip="Open Crew Detail">
+          <mat-icon>info</mat-icon> <!-- Replace 'info' with any icon of your choice -->
+        </button>
+      </td>
     </ng-container>
+    
     <!-- ID Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>

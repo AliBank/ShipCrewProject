@@ -4,8 +4,9 @@ import { CrewDetailPageComponent } from './crew-detail-page/crew-detail-page.com
 
 export const routes: Routes = [
   // Define your routes here
-  { path: 'crew/:id', component: CrewDetailPageComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' } // Adjust your default route as needed
+  { path: 'crew/:id', component: CrewDetailPageComponent }
+  //,
+  //{ path: '', redirectTo: '/home', pathMatch: 'full' } // Adjust your default route as needed
 ];
 
 @NgModule({
