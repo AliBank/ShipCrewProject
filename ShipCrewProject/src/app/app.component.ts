@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { CrewService } from './services/crew.service';
 import { Crew } from './models/crew.model';
@@ -30,7 +31,7 @@ export class AppComponent implements OnInit{
   ];
   dataSource = new MatTableDataSource<Crew>();
 
-  constructor(private crewService: CrewService) {}
+  constructor(private crewService: CrewService, private router: Router) {}
 
   ngOnInit(): void {
     this.getCrewList();
@@ -48,5 +49,9 @@ export class AppComponent implements OnInit{
     this.crewService.getCrewList().subscribe((crewList: Crew[]) => {
       this.dataSource.data = crewList;
     });
+  }
+
+  openCrewDetail(id: number): void {
+    this.router.navigate(['/crew', id]);
   }
 }

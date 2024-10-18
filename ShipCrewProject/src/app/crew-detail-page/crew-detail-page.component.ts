@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card'; // Import MatCardModule 
 import { Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'crew-detail-page',
@@ -18,21 +19,26 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CrewDetailPageComponent implements OnInit {
   rCrew: any;
+  crewId: number | undefined;
 
   constructor(private crewService: CrewService,
     private snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<CrewDetailPageComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.crewService.getCrewById(data.id).subscribe(result => {
-      if (result) {
-        this.rCrew = result;
-      }
-    },
-      error => { this.notify(error?.message, 'error', 5000); });
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.crewId = +params['id'];
 
+      this.crewService.getCrewById(this.crewId).subscribe(result => {
+        if (result) {
+          this.rCrew = result;
+        }
+      },
+        error => { this.notify(error?.message, 'error', 5000); });
+    });
   }
 
 

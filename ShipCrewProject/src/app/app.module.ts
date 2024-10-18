@@ -9,11 +9,11 @@ import { MatButtonModule } from '@angular/material/button'; // Import MatButtonM
 import { MatCardModule } from '@angular/material/card'; // Import MatCardModule if using mat-card
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
 import { CrewService } from './services/crew.service';
+import {CrewDetailPageComponent} from './crew-detail-page/crew-detail-page.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, CrewDetailPageComponent],
   imports: [BrowserModule, FormsModule, MatTableModule, BrowserAnimationsModule,MatListModule,MatButtonModule,MatCardModule,MatInputModule,MatFormFieldModule],
   providers: [CrewService],
   bootstrap: [AppComponent]
