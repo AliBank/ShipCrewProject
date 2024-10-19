@@ -20,7 +20,7 @@ export class Crew {
       else
         this.totalIncome = this.daysOnBoard * this.dailyRate;
 
-        switch (this.title) {
+        /* switch (this.title) {
           case 'Captain':
             this.totalIncome = 4*this.totalIncome;
             break; // Highest multiplier
@@ -42,7 +42,7 @@ export class Crew {
           default:
             this.totalIncome = 1*this.totalIncome; // Default multiplier
             break;
-        }
+        } */
 
         return this.totalIncome;
     }
