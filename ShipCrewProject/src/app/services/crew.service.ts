@@ -74,7 +74,7 @@ export class CrewService {
   // Example lists for countries, currencies, and certificate types
   nationalities = ['American', 'British', 'Turk', 'French', 'Arap', 'Japanese'];
   currencies = ['USD', 'EUR', 'GBP', 'CAD', 'JPY', 'TL'];
-  certificateTypes = ['Medical', 'Engineering', 'Safety', 'Technical', 'Governor', 'Hygiene'];
+  certificateTypes = ['Medicine', 'Engineering', 'Safety', 'Technic', 'Governor', 'Hygiene','Software','Culinary'];
   titles = ['Engineer', 'Captain', 'Medic', 'Cooker', 'Technician', 'Janitor']
 
   constructor() {
@@ -110,12 +110,14 @@ export class CrewService {
       return this.crewListSubject.asObservable();
     } */
   // Update an existing crew member.
-  updateCrew(updatedCrew: Crew): void {
+  updateCrew(updatedCrew: Crew): Observable<boolean> {
     const index = this.crewList.findIndex(crew => crew.id === updatedCrew.id);
     if (index !== -1) {
       this.crewList[index] = updatedCrew;
       updatedCrew.calculateTotalIncome();
+      return of(true);
     }
+    return of(false);
   }
 
   // Delete a crew member by ID.
@@ -125,7 +127,7 @@ export class CrewService {
   }
 
   // Get countries
-  getCountries(): Observable<string[]> {
+  getNationalities(): Observable<string[]> {
     return of(this.nationalities);
   }
 

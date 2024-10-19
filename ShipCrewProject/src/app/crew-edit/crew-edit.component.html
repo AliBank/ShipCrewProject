@@ -1,0 +1,141 @@
+<div *ngIf="rCrew && rCrew.certificates">
+    <mat-dialog-actions style="justify-content: space-between; margin-bottom: 1rem;">
+      <button mat-raised-button color="primary" class="save-button" (click)="onSave()">
+        Save
+      </button>
+    
+      <button mat-raised-button color="warn" class="cancel-button" (click)="onCancel()">
+        Cancel
+      </button>
+    </mat-dialog-actions>
+
+  <mat-tab-group>
+    <mat-tab label="Crew and Certificates">
+      <div class="form-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Id</mat-label>
+          <input matInput [(ngModel)]="rCrew.id" readonly />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input matInput [(ngModel)]="rCrew.firstName" readonly />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput [(ngModel)]="rCrew.lastName" readonly />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Nationality</mat-label>
+          <mat-select [(ngModel)]="rCrew.nationality" name="nationality" required>
+            <mat-option *ngFor="let nationality of nationalities" [value]="nationality">
+              {{ nationality }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <mat-select [(ngModel)]="rCrew.title" name="title" required>
+            <mat-option *ngFor="let title of titles" [value]="title">
+              {{ title }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill">
+          <mat-label>Days On Board</mat-label>
+          <input matInput [(ngModel)]="rCrew.daysOnBoard" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Daily Rate</mat-label>
+          <input matInput [(ngModel)]="rCrew.dailyRate" />
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill">
+          <mat-label>Currency</mat-label>
+          <mat-select [(ngModel)]="rCrew.currency" name="currency" required>
+            <mat-option *ngFor="let currency of currencies" [value]="currency">
+              {{ currency }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+<!--         <mat-form-field appearance="fill">
+          <mat-label>Total Income</mat-label>
+          <input matInput [(ngModel)]="rCrew.totalIncome" readonly />
+        </mat-form-field> -->
+        <h4>Certificates</h4>
+      </div>
+
+      <div *ngFor="let certificate of rCrew.certificates; let i = index" class="certificate-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Certificate Type</mat-label>
+          <mat-select [(ngModel)]="certificate.type" name="certificateType{{i}}" readonly>
+            <mat-option *ngFor="let type of certificateTypes" [value]="type">
+              {{ type }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Issue Date</mat-label>
+          <input matInput [(ngModel)]="certificate.issueDate" [matDatepicker]="issueDatePicker"
+            name="certificateIssueDate" />
+          <mat-datepicker-toggle matSuffix [for]="issueDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #issueDatePicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Expiry Date</mat-label>
+          <input matInput [(ngModel)]="certificate.expiryDate" [matDatepicker]="expiryDatePicker"
+            name="certificateExpiryDate" />
+          <mat-datepicker-toggle matSuffix [for]="expiryDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #expiryDatePicker></mat-datepicker>
+        </mat-form-field>
+
+
+        <button mat-icon-button color="warn" (click)="removeCertificate(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Add New Certificate">
+      <div class="form-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Certificate Type</mat-label>
+          <mat-select [(ngModel)]="rCertificate.type" name="certificateType" readonly>
+            <mat-option *ngFor="let type of certificateTypes" [value]="type">
+              {{ type }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Issue Date</mat-label>
+          <input matInput [(ngModel)]="rCertificate.issueDate" [matDatepicker]="issueDatePicker"
+            name="certificateIssueDate" />
+          <mat-datepicker-toggle matSuffix [for]="issueDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #issueDatePicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Expiry Date</mat-label>
+          <input matInput [(ngModel)]="rCertificate.expiryDate" [matDatepicker]="expiryDatePicker"
+            name="certificateExpiryDate" />
+          <mat-datepicker-toggle matSuffix [for]="expiryDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #expiryDatePicker></mat-datepicker>
+        </mat-form-field>
+        <button mat-icon-button color="success" (click)="addCertificate()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

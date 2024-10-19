@@ -25,11 +25,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker'; // Datepicke
 import { MatNativeDateModule } from '@angular/material/core'; // Native date support
 import { CertificateTypeAddComponent } from './certificate-type-add/certificate-type-add.component';
 import { CertificateModalComponent } from './certificate-modal/certificate-modal.component';
+import { CrewEditComponent} from './crew-edit/crew-edit.component';
 
 
 
 @NgModule({
-  declarations: [AppComponent, CrewComponent, CrewDetailPageComponent, CrewAddComponent, CertificateTypeAddComponent, CertificateModalComponent],
+  declarations: [AppComponent, CrewComponent, CrewDetailPageComponent, CrewAddComponent, CertificateTypeAddComponent, CertificateModalComponent, CrewEditComponent],
   imports: [AppRoutingModule,BrowserModule, FormsModule, MatTableModule, BrowserAnimationsModule,MatListModule,MatButtonModule,MatCardModule,MatInputModule,MatFormFieldModule,MatIconModule,MatTooltipModule,MatDialogModule, MatTabsModule, 
     MatSelectModule, MatOptionModule, ReactiveFormsModule, MatDatepickerModule, MatNativeDateModule],
   providers: [CrewService],

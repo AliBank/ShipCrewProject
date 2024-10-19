@@ -13,6 +13,7 @@ import { CrewDetailPageComponent } from '../crew-detail-page/crew-detail-page.co
 import { CrewAddComponent } from '../crew-add/crew-add.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CertificateModalComponent } from '../certificate-modal/certificate-modal.component';
+import { CrewEditComponent } from '../crew-edit/crew-edit.component';
 
 @Component({
   selector: 'crew',
@@ -130,6 +131,31 @@ export class CrewComponent implements OnInit {
       if (newCrew) {
         // Add the new crew to the list using the service
         this.crewService.addCrew(newCrew).subscribe(result => {
+          this.snackBar.open('Crew added successfully!', 'Close', {
+            duration: 3000,
+          });
+
+          // Refresh the crew list (if necessary)
+          this.getCrewList();
+        }, error => { });
+      }
+    });
+  }
+
+  openEditCrewDialog(id : number): void {
+    const dialogRef = this.dialog.open(CrewEditComponent, {
+      width: '90vw',  // 90% of the viewport width
+      height: '90vh', // 90% of the viewport height
+      maxWidth: '100vw', // Prevent any default max width constraint
+      maxHeight: '100vh', // Prevent height constraint
+      data: {id}, // Pass data if needed
+      panelClass: 'custom-dialog-container', // Optional custom styling
+    });
+
+    dialogRef.afterClosed().subscribe((newCrew: Crew) => {
+      if (newCrew) {
+        // Add the new crew to the list using the service
+        this.crewService.updateCrew(newCrew).subscribe(result => {
           this.snackBar.open('Crew added successfully!', 'Close', {
             duration: 3000,
           });

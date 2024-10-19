@@ -22,7 +22,7 @@ export class CrewAddComponent implements OnInit, AfterViewInit {
   /* countries = ['USA', 'Canada', 'UK', 'Germany']; // Example countries
   currencies = ['USD', 'EUR', 'GBP', 'CAD']; // Example currencies
   certificateTypes = ['Medical', 'Engineering', 'Safety', 'Technical']; */
-  countries: string[] = [];
+  nationalities: string[] = [];
   currencies: string[] = [];
   certificateTypes: string[] = [];
   titles: string[] = [];
@@ -59,7 +59,7 @@ export class CrewAddComponent implements OnInit, AfterViewInit {
   }
 
   private loadData(): void {
-    this.crewService.getCountries().subscribe((data) => (this.countries = data));
+    this.crewService.getNationalities().subscribe((data) => (this.nationalities = data));
     this.crewService.getCurrencies().subscribe((data) => (this.currencies = data));
     this.crewService.getCertificateTypes().subscribe((data) => (this.certificateTypes = data));
     this.crewService.getTitles().subscribe((data) => (this.titles = data));

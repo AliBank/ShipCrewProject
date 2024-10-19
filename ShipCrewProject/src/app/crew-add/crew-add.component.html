@@ -24,7 +24,7 @@
       
       <mat-form-field appearance="fill">
         <mat-label>Title</mat-label>
-        <mat-select [(ngModel)]="crew.title" name="nationality" required>
+        <mat-select [(ngModel)]="crew.title" name="title" required>
           <mat-option *ngFor="let title of titles" [value]="title">
             {{ title }}
           </mat-option>
@@ -34,8 +34,8 @@
       <mat-form-field appearance="fill">
         <mat-label>Nationality</mat-label>
         <mat-select [(ngModel)]="crew.nationality" name="nationality" required>
-          <mat-option *ngFor="let country of countries" [value]="country">
-            {{ country }}
+          <mat-option *ngFor="let nationality of nationalities" [value]="nationality">
+            {{ nationality }}
           </mat-option>
         </mat-select>
       </mat-form-field>
