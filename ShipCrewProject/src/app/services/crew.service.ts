@@ -75,7 +75,7 @@ export class CrewService {
   nationalities = ['American', 'British', 'Turk', 'French', 'Arap', 'Japanese'];
   currencies = ['USD', 'EUR', 'GBP', 'CAD', 'JPY', 'TL'];
   certificateTypes = ['Medicine', 'Engineering', 'Safety', 'Technic', 'Governor', 'Hygiene','Software','Culinary'];
-  titles = ['Engineer', 'Captain', 'Medic', 'Cooker', 'Technician', 'Janitor']
+  titles = ['Engineer', 'Captain', 'Medic', 'Cooker', 'Technician', 'Janitor'];
 
   constructor() {
     // Calculate initial total income for all crew members.
