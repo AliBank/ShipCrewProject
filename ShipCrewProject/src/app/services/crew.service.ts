@@ -19,7 +19,7 @@ export class CrewService {
       150,
       'TL',
       0,
-      [new Certificate('Software', new Date('2024-10-12'), new Date('2025-10-12'))]
+      [new Certificate('Software', '', new Date('2024-10-12'), new Date('2025-10-12'))]
     ),
     new Crew(
       2,
@@ -31,7 +31,7 @@ export class CrewService {
       130,
       'GBP',
       0,
-      [new Certificate('Captain', new Date('2023-06-01'), new Date('2025-06-01'))]
+      [new Certificate('Captain', '', new Date('2023-06-01'), new Date('2025-06-01'))]
     ),
     new Crew(
       3,
@@ -43,7 +43,7 @@ export class CrewService {
       100,
       'EUR',
       0,
-      [new Certificate('Culinary', new Date('2022-05-15'), new Date('2024-05-15'))]
+      [new Certificate('Culinary', '', new Date('2022-05-15'), new Date('2024-05-15'))]
     ),
     new Crew(
       4,
@@ -55,7 +55,7 @@ export class CrewService {
       40,
       'JPY',
       0,
-      [new Certificate('Technic', new Date('2020-05-15'), new Date('2024-03-11'))]
+      [new Certificate('Technic', '', new Date('2020-05-15'), new Date('2024-03-11'))]
     ),
     new Crew(
       5,
@@ -67,7 +67,7 @@ export class CrewService {
       85,
       'USD',
       0,
-      [new Certificate('Medicine', new Date('2018-05-15'), new Date('2027-03-11'))]
+      [new Certificate('Medicine', '', new Date('2018-05-15'), new Date('2027-03-11'))]
     )
   ];
 
@@ -143,10 +143,18 @@ export class CrewService {
     return of(this.certificateTypes);
   }
 
-
   // Get a new certificate instance
   getNewCertificate(): Certificate {
-    return new Certificate('', new Date(), new Date());
+    return new Certificate('', '', new Date(), new Date());
+  }
+
+  // Met/* */hod to add a new certificate type
+  addCertificateType(newType: string): Observable<boolean> {
+    if (!this.certificateTypes.includes(newType)) {
+      this.certificateTypes.push(newType);
+      return of(true); // Indicate success
+    }
+    return of(false); // If the type already exists
   }
 
   getNextCrewId(): Observable<number> {

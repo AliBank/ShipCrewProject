@@ -1,0 +1,43 @@
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    /* Adds space between form fields */
+    align-items: center;
+    /* Centers the elements horizontally */
+    justify-content: center;
+    /* Centers the elements vertically within the container */
+    width: 100%;
+    /* Ensures the form fields take up the full width of their container */
+    margin-top: 1rem
+  }
+
+  mat-form-field {
+    width: 20%;
+    /* Ensures each form field stretches across the container */
+  }
+
+  .certificate-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    width: 100%;
+  }
+
+  mat-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    /* Optional padding for spacing */
+  }
+
+  .save-button {
+    background-color: green;
+    color: white;
+  }
+
+  .cancel-button {
+    background-color: red;
+    color: white;
+  }

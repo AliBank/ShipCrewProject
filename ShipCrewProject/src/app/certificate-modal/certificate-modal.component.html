@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Certificates</h2>
+
+<mat-dialog-content>
+  <div *ngFor="let certificate of data.certificates; let i = index" class="certificate-container">
+    <p><strong>Type:</strong> {{ certificate.type }}</p>
+    <p><strong>Description:</strong> {{ certificate.description }}</p>
+    <p><strong>Issue Date:</strong> {{ certificate.issueDate | date: 'dd/MM/yyyy' }}</p>
+    <p><strong>Expiry Date:</strong> {{ certificate.expiryDate | date: 'dd/MM/yyyy' }}</p>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button color="primary" (click)="closeDialog()">Close</button>
+</mat-dialog-actions>

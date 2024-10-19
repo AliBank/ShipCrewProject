@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CrewDetailPageComponent } from '../crew-detail-page/crew-detail-page.component';
 import { CrewAddComponent } from '../crew-add/crew-add.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CertificateModalComponent } from '../certificate-modal/certificate-modal.component';
 
 @Component({
   selector: 'crew',
@@ -20,6 +21,41 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CrewComponent implements OnInit {
   title = 'ShipCrewProject';
+  selectedLanguage: string = 'en';
+
+  // Translations for labels
+  translations: any = {
+    en: {
+      firstName: 'First Name',
+      lastName: 'Last Name',
+      title: 'Title',
+      nationality: 'Nationality',
+      currency: 'Currency',
+      dailyRate: 'Daily Rate',
+      daysOnBoard: 'Days On Board'
+    },
+    fr: {
+      firstName: 'Prénom',
+      lastName: 'Nom de famille',
+      title: 'Titre',
+      nationality: 'Nationalité',
+      currency: 'Devise',
+      dailyRate: 'Taux journalier',
+      daysOnBoard: 'Jours à bord'
+    },
+    pt: {
+      firstName: 'Primeiro Nome',
+      lastName: 'Sobrenome',
+      title: 'Título',
+      nationality: 'Nacionalidade',
+      currency: 'Moeda',
+      dailyRate: 'Taxa Diária',
+      daysOnBoard: 'Dias a Bordo'
+    }
+  };
+
+  labels: any = this.translations[this.selectedLanguage]; // Labels for the selected language
+
 
   displayedColumns: string[] = [
     'actions',
@@ -31,7 +67,8 @@ export class CrewComponent implements OnInit {
     'daysOnBoard',
     'dailyRate',
     'currency',
-    'totalIncome'
+    'totalIncome',
+    'certificates'
   ];
   dataSource = new MatTableDataSource<Crew>();
 
@@ -66,6 +103,19 @@ export class CrewComponent implements OnInit {
     this.router.navigate(['/crew', id]);
   }
 
+  // Change language and update labels/*  */
+  switchLanguage(language: string): void {
+    this.selectedLanguage = language;
+    this.labels = this.translations[language];
+  }
+
+  openCertificatesModal(certificates: Certificate[]): void {
+    this.dialog.open(CertificateModalComponent, {
+      width: '50%',
+      data: { certificates },
+    });
+  }
+  
   openAddCrewDialog(): void {
     const dialogRef = this.dialog.open(CrewAddComponent, {
       width: '90vw',  // 90% of the viewport width
@@ -86,7 +136,7 @@ export class CrewComponent implements OnInit {
 
           // Refresh the crew list (if necessary)
           this.getCrewList();
-        }, error => {});
+        }, error => { });
       }
     });
   }

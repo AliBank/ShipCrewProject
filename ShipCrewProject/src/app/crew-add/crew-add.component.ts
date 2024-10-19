@@ -77,6 +77,7 @@ export class CrewAddComponent implements OnInit, AfterViewInit {
     // Add the new certificate to the crew's certificates array
     const certificate = new Certificate(
       this.newCertificate.type,
+      this.newCertificate.description,
       this.newCertificate.issueDate,
       this.newCertificate.expiryDate
     );

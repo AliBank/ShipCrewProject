@@ -1,6 +1,23 @@
-<button mat-raised-button color="primary" (click)="openAddCrewDialog()">
-  Add New Crew
-</button>
+<div class="header-container">
+  <div class="left-buttons">
+    <button mat-raised-button color="primary" (click)="openAddCrewDialog()">
+      Add New Crew
+    </button>
+
+    <button mat-raised-button routerLink="/certificate-types" style="margin-left: 1rem">
+      Manage Certificate Types
+    </button>
+  </div>
+
+  <div class="language-selector">
+    <mat-select [(ngModel)]="selectedLanguage" (selectionChange)="switchLanguage($event.value)">
+      <mat-option value="en">English</mat-option>
+      <mat-option value="fr">Français</mat-option>
+      <mat-option value="pt">Português</mat-option>
+    </mat-select>
+  </div>
+</div>
+
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -25,25 +42,25 @@
   
     <!-- First Name Column -->
     <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef> First Name </th>
+      <th mat-header-cell *matHeaderCellDef> {{ labels.firstName }} </th>
       <td mat-cell *matCellDef="let crew"> {{ crew.firstName }} </td>
     </ng-container>
   
     <!-- Last Name Column -->
     <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef> Last Name </th>
+      <th mat-header-cell *matHeaderCellDef> {{ labels.lastName }} </th>
       <td mat-cell *matCellDef="let crew"> {{ crew.lastName }} </td>
     </ng-container>
   
     <!-- Nationality Column -->
     <ng-container matColumnDef="nationality">
-      <th mat-header-cell *matHeaderCellDef> Nationality </th>
+      <th mat-header-cell *matHeaderCellDef> {{ labels.nationality }} </th>
       <td mat-cell *matCellDef="let crew"> {{ crew.nationality }} </td>
     </ng-container>
   
     <!-- Title Column -->
     <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef> Title </th>
+      <th mat-header-cell *matHeaderCellDef> {{ labels.title }} </th>
       <td mat-cell *matCellDef="let crew"> {{ crew.title }} </td>
     </ng-container>
   
@@ -70,6 +87,16 @@
       <th mat-header-cell *matHeaderCellDef> Total Income </th>
       <td mat-cell *matCellDef="let crew"> {{ crew.totalIncome }} </td>
     </ng-container>
+
+      <!-- Certificates Column -->
+  <ng-container matColumnDef="certificates">
+    <th mat-header-cell *matHeaderCellDef> Certificates </th>
+    <td mat-cell *matCellDef="let crew">
+      <button mat-button (click)="openCertificatesModal(crew.certificates)">
+        {{ crew.certificates.length }} Certificates
+      </button>
+    </td>
+  </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
