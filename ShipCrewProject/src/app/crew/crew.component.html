@@ -1,4 +1,7 @@
-<!-- app.component.html -->
+<button mat-raised-button color="primary" (click)="openAddCrewDialog()">
+  Add New Crew
+</button>
+
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="actions">
@@ -72,4 +75,3 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   
-  <router-outlet></router-outlet>

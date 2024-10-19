@@ -9,14 +9,16 @@ import { MatListModule } from '@angular/material/list'; // Import MatListModule 
 import { MatButtonModule } from '@angular/material/button'; // Import MatButtonModule if you're using mat-button
 import { MatCardModule } from '@angular/material/card'; // Import MatCardModule if using mat-card
 import { MatDialog } from '@angular/material/dialog';
-import { CrewDetailPageComponent } from  '../crew-detail-page/crew-detail-page.component';
+import { CrewDetailPageComponent } from '../crew-detail-page/crew-detail-page.component';
+import { CrewAddComponent } from '../crew-add/crew-add.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'crew',
   templateUrl: './crew.component.html',
   styleUrl: './crew.component.scss'
 })
-export class CrewComponent implements OnInit{
+export class CrewComponent implements OnInit {
   title = 'ShipCrewProject';
 
   displayedColumns: string[] = [
@@ -33,7 +35,7 @@ export class CrewComponent implements OnInit{
   ];
   dataSource = new MatTableDataSource<Crew>();
 
-  constructor(private crewService: CrewService, private router: Router, private dialog: MatDialog) {}
+  constructor(private crewService: CrewService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getCrewList();
@@ -53,17 +55,40 @@ export class CrewComponent implements OnInit{
     });
   }
 
+  /*   getCrewList(): void {
+      this.crewService.getCrewList().subscribe((list) => {
+        this.crewList = list; // Update local list
+        this.dataSource.data = crewList;
+      });
+    } */
+
   openCrewDetail(id: number): void {
     this.router.navigate(['/crew', id]);
   }
 
-  openDialog(crewId: number): void {
-    const dialogRef = this.dialog.open(CrewDetailPageComponent, {
-      data: { id: crewId }
+  openAddCrewDialog(): void {
+    const dialogRef = this.dialog.open(CrewAddComponent, {
+      width: '90vw',  // 90% of the viewport width
+      height: '90vh', // 90% of the viewport height
+      maxWidth: '100vw', // Prevent any default max width constraint
+      maxHeight: '100vh', // Prevent height constraint
+      data: {}, // Pass data if needed
+      panelClass: 'custom-dialog-container', // Optional custom styling
     });
-  
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog closed with result:', result);
+
+    dialogRef.afterClosed().subscribe((newCrew: Crew) => {
+      if (newCrew) {
+        // Add the new crew to the list using the service
+        this.crewService.addCrew(newCrew).subscribe(result => {
+          this.snackBar.open('Crew added successfully!', 'Close', {
+            duration: 3000,
+          });
+
+          // Refresh the crew list (if necessary)
+          this.getCrewList();
+        }, error => {});
+      }
     });
   }
+
 }

@@ -10,16 +10,26 @@ import { MatCardModule } from '@angular/material/card'; // Import MatCardModule 
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CrewService } from './services/crew.service';
-import {CrewDetailPageComponent} from './crew-detail-page/crew-detail-page.component';
-import {CrewComponent} from './crew/crew.component';
+import { CrewDetailPageComponent } from './crew-detail-page/crew-detail-page.component';
+import { CrewComponent } from './crew/crew.component';
+import { CrewAddComponent } from './crew-add/crew-add.component';
 import { MatIconModule } from '@angular/material/icon'; // For icons
 import { MatTooltipModule } from '@angular/material/tooltip'; // For tooltips
 import { AppRoutingModule } from './app.routing.module'; // Adjust the import path
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select'; // Import MatSelectModule
+import { MatOptionModule } from '@angular/material/core'; // MatOption is included in core
+import { ReactiveFormsModule} from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker'; // Datepicker module
+import { MatNativeDateModule } from '@angular/material/core'; // Native date support
+
+
 
 @NgModule({
-  declarations: [AppComponent, CrewComponent, CrewDetailPageComponent],
-  imports: [AppRoutingModule,BrowserModule, FormsModule, MatTableModule, BrowserAnimationsModule,MatListModule,MatButtonModule,MatCardModule,MatInputModule,MatFormFieldModule,MatIconModule,MatTooltipModule,MatDialogModule],
+  declarations: [AppComponent, CrewComponent, CrewDetailPageComponent, CrewAddComponent],
+  imports: [AppRoutingModule,BrowserModule, FormsModule, MatTableModule, BrowserAnimationsModule,MatListModule,MatButtonModule,MatCardModule,MatInputModule,MatFormFieldModule,MatIconModule,MatTooltipModule,MatDialogModule, MatTabsModule, 
+    MatSelectModule, MatOptionModule, ReactiveFormsModule, MatDatepickerModule, MatNativeDateModule],
   providers: [CrewService],
   bootstrap: [AppComponent]
 })

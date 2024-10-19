@@ -2,20 +2,23 @@ import {Certificate} from './certificate.model';
 
 export class Crew {
     constructor(
-      public id: number,
-      public firstName: string,
-      public lastName: string,
-      public nationality: string,
-      public title: string,
-      public daysOnBoard: number,
-      public dailyRate: number,
-      public currency: string,
-      public totalIncome: number,
+      public id: number | null = null,
+      public firstName: string = '',
+      public lastName: string = '',
+      public nationality: string = '',
+      public title: string = '',
+      public daysOnBoard: number | null = null,
+      public dailyRate: number | null = null,
+      public currency: string = '',
+      public totalIncome: number | null = null,
       public certificates: Certificate[] = []
     ) {}
   
     calculateTotalIncome(): number {
-      this.totalIncome = this.daysOnBoard * this.dailyRate;
+      if(!this.dailyRate || !this.daysOnBoard)
+        this.totalIncome = 0;
+      else
+        this.totalIncome = this.daysOnBoard * this.dailyRate;
       return this.totalIncome;
     }
   

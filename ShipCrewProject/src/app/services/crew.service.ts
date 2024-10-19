@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Crew } from '../models/crew.model';
 import { Certificate } from '../models/certificate.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -70,6 +71,12 @@ export class CrewService {
     )
   ];
 
+  // Example lists for countries, currencies, and certificate types
+  nationalities = ['American', 'British', 'Turk', 'French', 'Arap', 'Japanese'];
+  currencies = ['USD', 'EUR', 'GBP', 'CAD', 'JPY', 'TL'];
+  certificateTypes = ['Medical', 'Engineering', 'Safety', 'Technical', 'Governor', 'Hygiene'];
+  titles = ['Engineer', 'Captain', 'Medic', 'Cooker', 'Technician', 'Janitor']
+
   constructor() {
     // Calculate initial total income for all crew members.
     this.crewList.forEach(crew => crew.calculateTotalIncome());
@@ -91,11 +98,17 @@ export class CrewService {
   }
 
   // Add a new crew member.
-  addCrew(newCrew: Crew): void {
+  addCrew(newCrew: Crew): Observable<boolean> {
     newCrew.calculateTotalIncome();
     this.crewList.push(newCrew);
+    return of(true);
   }
 
+
+  /*   // Expose as Observable
+    getCrewList(): Observable<Crew[]> {
+      return this.crewListSubject.asObservable();
+    } */
   // Update an existing crew member.
   updateCrew(updatedCrew: Crew): void {
     const index = this.crewList.findIndex(crew => crew.id === updatedCrew.id);
@@ -109,5 +122,41 @@ export class CrewService {
   deleteCrew(id: number): Observable<boolean> {
     this.crewList = this.crewList.filter(crew => crew.id !== id);
     return of(true);
+  }
+
+  // Get countries
+  getCountries(): Observable<string[]> {
+    return of(this.nationalities);
+  }
+
+  // Get currencies
+  getCurrencies(): Observable<string[]> {
+    return of(this.currencies);
+  }
+  // Get titles
+  getTitles(): Observable<string[]> {
+    return of(this.titles);
+  }
+
+  // Get certificate types
+  getCertificateTypes(): Observable<string[]> {
+    return of(this.certificateTypes);
+  }
+
+
+  // Get a new certificate instance
+  getNewCertificate(): Certificate {
+    return new Certificate('', new Date(), new Date());
+  }
+
+  getNextCrewId(): Observable<number> {
+    if (this.crewList && this.crewList.length > 0) {
+      const maxId = Math.max(
+        ...this.crewList.map(crew => crew.id).filter(id => id !== null && id !== undefined)
+      );
+      return of(maxId + 1); // Wrap the result in an Observable
+    } else {
+      return of(1); // If list is empty, return 1 wrapped in an Observable
+    }
   }
 }
