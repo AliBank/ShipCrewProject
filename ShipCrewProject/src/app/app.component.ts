@@ -8,6 +8,8 @@ import { Certificate } from './models/certificate.model';
 import { MatListModule } from '@angular/material/list'; // Import MatListModule here
 import { MatButtonModule } from '@angular/material/button'; // Import MatButtonModule if you're using mat-button
 import { MatCardModule } from '@angular/material/card'; // Import MatCardModule if using mat-card
+import { MatDialog } from '@angular/material/dialog';
+import { CrewDetailPageComponent } from  './crew-detail-page/crew-detail-page.component';
 
 @Component({
   selector: 'app-root',
@@ -17,41 +19,9 @@ import { MatCardModule } from '@angular/material/card'; // Import MatCardModule 
 export class AppComponent implements OnInit{
   title = 'ShipCrewProject';
 
-  displayedColumns: string[] = [
-    'actions',
-    'id',
-    'firstName',
-    'lastName',
-    'nationality',
-    'title',
-    'daysOnBoard',
-    'dailyRate',
-    'currency',
-    'totalIncome'
-  ];
-  dataSource = new MatTableDataSource<Crew>();
+  constructor(private crewService: CrewService, private router: Router, private dialog: MatDialog) {}
 
-  constructor(private crewService: CrewService, private router: Router) {}
-
-  ngOnInit(): void {
-    this.getCrewList();
+  ngOnInit(): void { 
   }
 
-  deleteCrewMember(id: number): void {
-    this.crewService.deleteCrew(id).subscribe(success => {
-      if (success) {
-        this.getCrewList();
-      }
-    });
-  }
-
-  getCrewList() {
-    this.crewService.getCrewList().subscribe((crewList: Crew[]) => {
-      this.dataSource.data = crewList;
-    });
-  }
-
-  openCrewDetail(id: number): void {
-    this.router.navigate(['/crew', id]);
-  }
 }

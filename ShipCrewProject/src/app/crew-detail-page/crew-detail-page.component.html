@@ -1,65 +1,68 @@
 <div *ngIf="rCrew && rCrew.certificates">
-  
-  <mat-form-field appearance="fill">
-    <mat-label>Id</mat-label>
-    <input matInput [(ngModel)]="rCrew.id" readonly />
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>First Name</mat-label>
-    <input matInput [(ngModel)]="rCrew.firstName" readonly />
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Last Name</mat-label>
-    <input matInput [(ngModel)]="rCrew.lastName" readonly />
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Nationality</mat-label>
-    <input matInput [(ngModel)]="rCrew.nationality" readonly />
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Title</mat-label>
-    <input matInput [(ngModel)]="rCrew.title" readonly />
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Days On Board</mat-label>
-    <input matInput [(ngModel)]="rCrew.daysOnBoard" readonly />
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Daily Rate</mat-label>
-    <input matInput [(ngModel)]="rCrew.dailyRate" readonly />
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Currency</mat-label>
-    <input matInput [(ngModel)]="rCrew.currency" readonly />
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Total Income</mat-label>
-    <input matInput [(ngModel)]="rCrew.totalIncome" readonly />
-  </mat-form-field>
-
-  <div *ngFor="let certificate of rCrew.certificates">
+  <button mat-raised-button color="primary" style ="margin-left: 1rem; margin-top: 0.5rem" (click)="goBack()">Back to Crew List</button>
+  <div class="form-container">
     <mat-form-field appearance="fill">
-      <mat-label>Certificate Type</mat-label>
-      <input matInput [(ngModel)]="certificate.type" readonly />
+      <mat-label>Id</mat-label>
+      <input matInput [(ngModel)]="rCrew.id" readonly />
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Issue Date</mat-label>
-      <input matInput [(ngModel)]="certificate.issueDate" readonly />
+      <mat-label>First Name</mat-label>
+      <input matInput [(ngModel)]="rCrew.firstName" readonly />
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Expiry Date</mat-label>
-      <input matInput [(ngModel)]="certificate.expiryDate" readonly />
+      <mat-label>Last Name</mat-label>
+      <input matInput [(ngModel)]="rCrew.lastName" readonly />
     </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nationality</mat-label>
+      <input matInput [(ngModel)]="rCrew.nationality" readonly />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput [(ngModel)]="rCrew.title" readonly />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Days On Board</mat-label>
+      <input matInput [(ngModel)]="rCrew.daysOnBoard" readonly />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Daily Rate</mat-label>
+      <input matInput [(ngModel)]="rCrew.dailyRate" readonly />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Currency</mat-label>
+      <input matInput [(ngModel)]="rCrew.currency" readonly />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Total Income</mat-label>
+      <input matInput [(ngModel)]="rCrew.totalIncome" readonly />
+    </mat-form-field>
+
+    <h4>Certificates</h4>
+
+    <div *ngFor="let certificate of rCrew.certificates" class="certificate-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Certificate Type</mat-label>
+        <input matInput [(ngModel)]="certificate.type" readonly />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Issue Date</mat-label>
+        <input matInput [value]="formatDate(certificate.issueDate)" readonly />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Expiry Date</mat-label>
+        <input matInput [value]="formatDate(certificate.expiryDate)" readonly />
+      </mat-form-field>
+    </div>
   </div>
-
 </div>

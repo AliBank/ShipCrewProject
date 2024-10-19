@@ -11,13 +11,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CrewService } from './services/crew.service';
 import {CrewDetailPageComponent} from './crew-detail-page/crew-detail-page.component';
+import {CrewComponent} from './crew/crew.component';
 import { MatIconModule } from '@angular/material/icon'; // For icons
 import { MatTooltipModule } from '@angular/material/tooltip'; // For tooltips
 import { AppRoutingModule } from './app.routing.module'; // Adjust the import path
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [AppComponent, CrewDetailPageComponent],
-  imports: [AppRoutingModule,BrowserModule, FormsModule, MatTableModule, BrowserAnimationsModule,MatListModule,MatButtonModule,MatCardModule,MatInputModule,MatFormFieldModule,MatIconModule,MatTooltipModule],
+  declarations: [AppComponent, CrewComponent, CrewDetailPageComponent],
+  imports: [AppRoutingModule,BrowserModule, FormsModule, MatTableModule, BrowserAnimationsModule,MatListModule,MatButtonModule,MatCardModule,MatInputModule,MatFormFieldModule,MatIconModule,MatTooltipModule,MatDialogModule],
   providers: [CrewService],
   bootstrap: [AppComponent]
 })

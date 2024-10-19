@@ -18,7 +18,7 @@ export class CrewService {
       150,
       'TL',
       0,
-      [new Certificate('Software', '2024-10-12', '2025-10-12')]
+      [new Certificate('Software', new Date('2024-10-12'), new Date('2025-10-12'))]
     ),
     new Crew(
       2,
@@ -30,7 +30,7 @@ export class CrewService {
       130,
       'GBP',
       0,
-      [new Certificate('Captain', '2023-06-01', '2025-06-01')]
+      [new Certificate('Captain', new Date('2023-06-01'), new Date('2025-06-01'))]
     ),
     new Crew(
       3,
@@ -42,7 +42,7 @@ export class CrewService {
       100,
       'EUR',
       0,
-      [new Certificate('Culinary', '2022-05-15', '2024-05-15')]
+      [new Certificate('Culinary', new Date('2022-05-15'), new Date('2024-05-15'))]
     ),
     new Crew(
       4,
@@ -54,7 +54,7 @@ export class CrewService {
       40,
       'JPY',
       0,
-      [new Certificate('Technic', '2020-05-15', '2024-03-11')]
+      [new Certificate('Technic', new Date('2020-05-15'), new Date('2024-03-11'))]
     ),
     new Crew(
       5,
@@ -66,7 +66,7 @@ export class CrewService {
       85,
       'USD',
       0,
-      [new Certificate('Medicine', '2018-05-15', '2027-03-11')]
+      [new Certificate('Medicine', new Date('2018-05-15'), new Date('2027-03-11'))]
     )
   ];
 

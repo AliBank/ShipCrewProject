@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { CrewService } from '../services/crew.service';
@@ -11,11 +11,14 @@ import { Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'crew-detail-page',
   templateUrl: './crew-detail-page.component.html',
-  styleUrl: './crew-detail-page.component.scss'
+  styleUrl: './crew-detail-page.component.scss',
+  providers: [DatePipe]
 })
 export class CrewDetailPageComponent implements OnInit {
   rCrew: any;
@@ -23,9 +26,11 @@ export class CrewDetailPageComponent implements OnInit {
 
   constructor(private crewService: CrewService,
     private snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<CrewDetailPageComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private route: ActivatedRoute) {
+    @Optional() public dialogRef: MatDialogRef<CrewDetailPageComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    private route: ActivatedRoute,
+    private router: Router,
+    private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
@@ -48,5 +53,13 @@ export class CrewDetailPageComponent implements OnInit {
       duration: duration,
       panelClass: type === 'success' ? 'success-snackbar' : 'error-snackbar'
     });
+  }
+
+  formatDate(date: string): string {
+    return this.datePipe.transform(date, 'dd/MM/yyyy') || '';
+  }
+
+  goBack(): void {
+    this.router.navigate(['/']); // Adjust the path as needed
   }
 }

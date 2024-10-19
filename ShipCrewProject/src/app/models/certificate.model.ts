@@ -1,12 +1,13 @@
-export class Certificate {
+  export class Certificate {
     constructor(
       public type: string,
-      public issueDate: string, // ISO date format, e.g., '2024-10-12'
-      public expiryDate: string // ISO date format, e.g., '2025-10-12'
+      public issueDate: Date, // Date object for issue date
+      public expiryDate: Date // Date object for expiry date
     ) {}
   
     isExpired(): boolean {
-      const today = new Date().toISOString().split('T')[0];
+      const today = new Date();
       return this.expiryDate < today;
     }
   }
+  
