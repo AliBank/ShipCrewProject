@@ -19,10 +19,15 @@ import { DatePipe } from '@angular/common';
 export class CrewAddComponent implements OnInit, AfterViewInit {
   @ViewChild('crewForm') crewForm!: NgForm;
   crew: Crew = new Crew(); // Initialize the crew object
-  countries = ['USA', 'Canada', 'UK', 'Germany']; // Example countries
+  /* countries = ['USA', 'Canada', 'UK', 'Germany']; // Example countries
   currencies = ['USD', 'EUR', 'GBP', 'CAD']; // Example currencies
+  certificateTypes = ['Medical', 'Engineering', 'Safety', 'Technical']; */
+  countries: string[] = [];
+  currencies: string[] = [];
+  certificateTypes: string[] = [];
+  titles: string[] = [];
   newCertificate: Certificate = new Certificate(); // Temporary certificate for adding
-  certificateTypes = ['Medical', 'Engineering', 'Safety', 'Technical'];
+
 
   @ViewChildren('issueDatePicker') issueDatePickers!: QueryList<MatDatepicker<any>>;
   @ViewChildren('expiryDatePicker') expiryDatePickers!: QueryList<MatDatepicker<any>>;
@@ -35,12 +40,13 @@ export class CrewAddComponent implements OnInit, AfterViewInit {
     private crewService: CrewService,
     private snackBar: MatSnackBar,
     private datePipe: DatePipe
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.crewService.getNextCrewId().subscribe(
       (id) => {
         this.crew.id = id; // Assign the next available ID
+        this.loadData();
       },
       (error) => this.notify(error?.message, 'error', 5000)
     );
@@ -52,6 +58,13 @@ export class CrewAddComponent implements OnInit, AfterViewInit {
     this.expiryDateArray = this.expiryDatePickers.toArray();
   }
 
+  private loadData(): void {
+    this.crewService.getCountries().subscribe((data) => (this.countries = data));
+    this.crewService.getCurrencies().subscribe((data) => (this.currencies = data));
+    this.crewService.getCertificateTypes().subscribe((data) => (this.certificateTypes = data));
+    this.crewService.getTitles().subscribe((data) => (this.titles = data));
+  }
+
   removeCertificate(index: number): void {
     this.crew.certificates.splice(index, 1); // Remove certificate by index
   }
@@ -59,7 +72,7 @@ export class CrewAddComponent implements OnInit, AfterViewInit {
   formatDate(date: Date | string): string {
     return this.datePipe.transform(date, 'dd/MM/yyyy') || '';
   }
-  
+
   addCertificate(): void {
     // Add the new certificate to the crew's certificates array
     const certificate = new Certificate(

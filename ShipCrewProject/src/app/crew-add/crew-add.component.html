@@ -21,10 +21,14 @@
         <mat-label>Last Name</mat-label>
         <input matInput [(ngModel)]="crew.lastName" name="lastName" required />
       </mat-form-field>
-
+      
       <mat-form-field appearance="fill">
         <mat-label>Title</mat-label>
-        <input matInput [(ngModel)]="crew.title" name="title" required />
+        <mat-select [(ngModel)]="crew.title" name="nationality" required>
+          <mat-option *ngFor="let title of titles" [value]="title">
+            {{ title }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
